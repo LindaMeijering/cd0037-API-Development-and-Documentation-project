@@ -102,7 +102,7 @@ You can optionally update this game play to increase the number of questions or 
       "question": "This is a question",
       "answer": "This is an answer",
       "difficulty": 5,
-      "category": 2
+      "category_id": 2
     }
   ],
   "totalQuestions": 100,
@@ -134,7 +134,7 @@ You can optionally update this game play to increase the number of questions or 
       "question": "This is a question",
       "answer": "This is an answer",
       "difficulty": 5,
-      "category": 4
+      "category_id": 4
     }
   ],
   "totalQuestions": 100,
@@ -173,7 +173,7 @@ You can optionally update this game play to increase the number of questions or 
     "question": "This is a question",
     "answer": "This is an answer",
     "difficulty": 5,
-    "category": 4
+    "category_id": 4
   }
 }
 ```
@@ -190,7 +190,7 @@ You can optionally update this game play to increase the number of questions or 
   "question": "Heres a new question string",
   "answer": "Heres a new answer string",
   "difficulty": 1,
-  "category": 3
+  "category_id": 3
 }
 ```
 
@@ -219,7 +219,7 @@ You can optionally update this game play to increase the number of questions or 
       "question": "This is a question",
       "answer": "This is an answer",
       "difficulty": 5,
-      "category": 5
+      "category_id": 5
     }
   ],
   "totalQuestions": 100,

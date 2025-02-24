@@ -163,7 +163,7 @@ class QuestionView extends Component {
               key={q.id}
               question={q.question}
               answer={q.answer}
-              category={this.state.categories[q.category]}
+              category_id={this.state.categories[q.category_id]}
               difficulty={q.difficulty}
               questionAction={this.questionAction(q.id)}
             />
