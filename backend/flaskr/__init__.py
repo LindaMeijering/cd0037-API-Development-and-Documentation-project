@@ -139,7 +139,6 @@ def create_app(test_config=None):
     def retrieve_questions_from_category(category):
             category = Category.query.filter(
                 Category.id == category).one_or_none()
-            print(category)
 
             if category is None:
                 abort(404)
