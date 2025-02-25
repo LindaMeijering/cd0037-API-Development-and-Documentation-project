@@ -102,3 +102,148 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+
+# API Endpoint Documentation
+
+Following an overview of the API endpoints.
+
+## Endpoints
+
+### GET `/categories`
+
+- **Description**: Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- **Request Arguments**: None
+- **Returns**: An object with a single key, `categories`, containing an object of `id: category_string` key-value pairs.
+
+  **Example Response**:
+  ```json
+  {
+    "success": true,
+    "categories": {
+      "1": "Science",
+      "2": "Art",
+      "3": "Geography",
+      "4": "History",
+      "5": "Entertainment",
+      "6": "Sports"
+    },
+    "total_categories": 6
+  }
+
+
+### GET `/questions`
+- **Description**: Retrieves a paginated list of questions.
+- **Request Arguments**:
+page (optional): The page number to retrieve.
+- **Returns**: An object containing a list of questions, total number of questions, current category, and categories. 
+  **Example Response**:
+  ```json:
+  {
+    "success": true,
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the capital of France?",
+        "answer": "Paris",
+        "category_id": 3,
+        "difficulty": 2
+      },
+      ...
+    ],
+    "total_questions": 20,
+    "current_category": null,
+    "categories": {
+      "1": "Science",
+      "2": "Art",
+      ...
+    },
+    "current_page": 1
+  }
+
+
+
+### DELETE /questions/<int:question_id>
+- **Description**: Deletes a specific question by its ID.
+- **Request Argumetns**: None
+- **Returns**: An object indicating success or failure and the ID of the deleted question.   
+**Example Response**:
+  ```json:
+  {
+    "success": true,
+    "deleted": 1,
+    "questions": [...],
+    "total_questions": 19
+  }
+
+
+### POST /questions
+- **Description**: Creates a new question.
+- **Request Argumetns**: JSON body containing question, answer, category_id, and difficulty.
+- **Returns**: An object indicating the success or failure and the ID of the created question.   
+**Example Response**:
+  ```json:
+{
+  "success": true,
+  "created": 21,
+  "questions": [...],
+  "total_questions": 21
+}
+
+
+
+### POST /questions/search
+- **Description**: Searches for questions based on a search term.
+- **Request Argumetns**: JSON body containing searchTerm.
+- **Returns**: A list of questions that match the search term.   
+**Example Response**:
+  ```json:
+{
+  "success": true,
+  "questions": [...],
+  "total_questions": 5,
+  "current_category": ""
+}
+
+
+
+### GET /categories/<int:category>/questions
+- **Description**: Retrieves questions for a specific category.
+- **Request Argumetns**: None
+- **Returns**: A list of questions for the specified category.   
+**Example Response**:
+  ```json:
+{
+  "success": true,
+  "questions": [...],
+  "total_questions": 10,
+  "current_category": "Science"
+}
+
+
+
+### POST /quizzes
+- **Description**: Retrievs a random question for a quiz, not including previously asked questions.
+- **Request Argumetns**: JSON body containing previous_questions and quiz_category.
+- **Returns**: A random question not in the list of previous questions.   
+**Example Response**:
+  ```json:
+{
+  "success": true,
+  "question": {
+    "id": 5,
+    "question": "What is the powerhouse of the cell?",
+    "answer": "Mitochondria",
+    "category_id": 1,
+    "difficulty": 2
+  }
+}
+
+
+
+## Error Handling
+The API returns standard error codes along with a JSON object with the error details.
+
+404 Not Found: Resource not found.
+422 Unprocessable Entity: Request could not be processed.
+500 Internal Server Error: An unexpected error occurred.
+400 Bad Request: The request was invalid or cannot be served.
