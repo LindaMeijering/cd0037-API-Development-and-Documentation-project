@@ -1,7 +1,5 @@
-import os
+import json
 import unittest
-import logging
-from flask import json
 from flaskr import create_app
 from models import db, Question, Category
 
@@ -9,19 +7,11 @@ from models import db, Question, Category
 class TriviaTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
 
-    @classmethod
-    def setUpClass(cls):
-        """Configure logging once for all tests"""
-        logging.basicConfig(level=logging.INFO,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
-        cls.logger = logging.getLogger(__name__)
-
-
     def setUp(self):
         """Define test variables and initialize app."""
         self.database_name = "trivia_test"
-        self.database_user = "lindameijering"
-        self.database_password = "!2503Maart!"
+        self.database_user = "postgres"
+        self.database_password = "postgres"
         self.database_host = "localhost:5432"
         self.database_path = f"postgresql://{self.database_user}:{self.database_password}@{self.database_host}/{self.database_name}"
 
@@ -41,11 +31,8 @@ class TriviaTestCase(unittest.TestCase):
     def tearDown(self):
         """Executed after each test"""
         with self.app.app_context():
-            # Manually delete all questions to avoid foreign key constraint issues
             db.session.query(Question).delete()
             db.session.commit()
-
-            # Now drop all tables
             db.drop_all()
 
     def test_get_all_categories(self):
@@ -274,10 +261,7 @@ def populate_db(db):
     ]
     db.session.bulk_save_objects(questions)
     db.session.commit()
-    
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
-
-# CREATE ROLE student;
