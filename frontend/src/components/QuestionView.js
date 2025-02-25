@@ -110,12 +110,19 @@ class QuestionView extends Component {
 
   questionAction = (id) => (action) => {
     if (action === 'DELETE') {
-      if (window.confirm('are you sure you want to delete the question?')) {
+      if (window.confirm('Are you sure you want to delete the question?')) {
         $.ajax({
           url: `/questions/${id}`,
           type: 'DELETE',
           success: (result) => {
-            this.getQuestions();
+            const newTotalQuestions = result.total_questions;
+            const maxPage = Math.ceil(newTotalQuestions / 10);
+            const newPage =
+              this.state.page > maxPage ? maxPage : this.state.page;
+            this.setState(
+              { totalQuestions: newTotalQuestions, page: newPage },
+              this.getQuestions
+            );
           },
           error: (error) => {
             alert('Unable to load questions. Please try your request again');
